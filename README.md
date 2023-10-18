@@ -10,13 +10,13 @@ This project is still early in development, I will keep this section updated as 
 
 ## Tech Stack
 
-### Backend Tech Stack
+### Backend
 
 - NestJS
 - TypeORM
 - PostgreSQL
 
-### Frontend Tech Stack (plan)
+### Frontend (planned)
 
 - Next 13 (app directory)
 - Tailwind CSS
