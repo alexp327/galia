@@ -1,3 +1,4 @@
+import { ProjectType } from 'src/shared/projecttype';
 import {
   Column,
   CreateDateColumn,
@@ -11,14 +12,46 @@ export class CompletedReviewEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ default: '' })
   artist: string;
+
+  @Column({ default: '' })
+  title: string;
+
+  @Column({
+    type: 'enum',
+    enum: ProjectType,
+    default: ProjectType.ALBUM,
+  })
+  projectType: ProjectType;
+
+  @Column('simple-array')
+  genres: string[];
+
+  @Column({ default: 0 })
+  releaseYear: number;
+
+  @Column({ default: 0 })
+  rating: number;
+
+  @Column({ default: '' })
+  recommender: string;
+
+  @Column('simple-array')
+  bestTracks: string[];
+
+  @Column({ default: '' })
+  notes: string;
+
+  @Column({ default: false })
+  hasVinyl: boolean;
+
+  @Column({ default: false })
+  needsReduxReview: boolean;
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
-
-  // TODO: add more columns here to match
 }
