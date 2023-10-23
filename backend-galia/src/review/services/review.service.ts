@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CompletedReviewEntity } from '../models/review.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { Review } from '../models/review.interface';
 import { Observable, from } from 'rxjs';
 
@@ -16,7 +16,19 @@ export class ReviewService {
     return from(this.reviewRepository.find());
   }
 
+  findById(id: number): Observable<Review> {
+    return from(this.reviewRepository.findOneByOrFail({ id: id }));
+  }
+
   createReview(review: Review): Observable<Review> {
     return from(this.reviewRepository.save(review));
+  }
+
+  updateReview(id: number, review: Review): Observable<UpdateResult> {
+    return from(this.reviewRepository.update(id, review));
+  }
+
+  deleteReview(id: number): Observable<DeleteResult> {
+    return from(this.reviewRepository.delete(id));
   }
 }
