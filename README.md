@@ -18,6 +18,6 @@ This project is still early in development, I will keep this section updated as 
 
 ### Frontend (planned)
 
-- Next 13 (app directory)
+- Next 14 (app directory)
 - Tailwind CSS
 
