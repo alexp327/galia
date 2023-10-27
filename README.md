@@ -16,7 +16,7 @@ This project is still early in development, I will keep this section updated as 
 - TypeORM
 - PostgreSQL
 
-### Frontend (planned)
+### Frontend
 
 - Next 14 (app directory)
 - Tailwind CSS
