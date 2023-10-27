@@ -19,7 +19,8 @@ interface MusicInfo {
 }
 
 const listPage = async () => {
-  const res = await fetch('http://172.20.0.4:3000/api/review', {
+  // TODO: set env var in docker compose with container reference
+  const res = await fetch('http://172.18.0.5:3000/api/review', {
     method: 'GET',
     cache: 'no-store',
   });

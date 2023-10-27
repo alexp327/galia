@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -59,7 +60,7 @@ export default function RootLayout({
                 </li>
               </ul>
             </div>
-            <a className='btn btn-ghost normal-case text-xl'>Galia</a>
+            <Link href={"/"} className='btn btn-ghost normal-case text-xl'>Galia</Link>
           </div>
           <div className='navbar-center hidden lg:flex'>
             <ul className='menu menu-horizontal px-1'>
