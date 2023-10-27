@@ -3,7 +3,19 @@ version: '3.8'
 name: galia
 
 services:
-  app:
+  client:
+    build: 
+      context: ./frontend-galia
+      dockerfile: Dockerfile
+    container_name: frontend-galia
+    ports:
+      - '1738:3000'
+    volumes:
+      - ./frontend-galia:/src
+    depends_on:
+      - api
+
+  api:
     build:
       context: ./backend-galia
       dockerfile: Dockerfile
