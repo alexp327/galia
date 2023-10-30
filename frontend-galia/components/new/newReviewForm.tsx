@@ -1,6 +1,7 @@
 'use client';
 import { ProjectType } from '@/shared/projecttype';
 import { Review } from '@/shared/review.interface';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const newReviewForm = () => {
@@ -16,6 +17,8 @@ const newReviewForm = () => {
   const [hasVinyl, setHasVinyl] = useState(false);
   const [needsReduxReview, setNeedsReduxReview] = useState(false);
   const [isPending, setIsPending] = useState(false);
+
+  const router = useRouter();
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -44,6 +47,7 @@ const newReviewForm = () => {
       }).then((response) => {
         console.log(response);
         setIsPending(false);
+        router.push('/list');
       });
     } catch (e) {
       console.error(e);
