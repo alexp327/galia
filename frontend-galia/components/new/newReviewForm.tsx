@@ -1,28 +1,64 @@
 'use client';
+import { ProjectType } from '@/shared/projecttype';
+import { Review } from '@/shared/review.interface';
 import React, { useState } from 'react';
 
 const newReviewForm = () => {
   const [artist, setArtist] = useState('');
   const [title, setTitle] = useState('');
-  const [type, setType] = useState('default');
+  const [projectType, setProjectType] = useState('default');
   const [genres, setGenres] = useState('');
   const [releaseYear, setReleaseYear] = useState('');
   const [rating, setRating] = useState(1);
   const [recommender, setRecommender] = useState('');
   const [bestTracks, setBestTracks] = useState('');
-  const [comment, setComment] = useState('');
-  const [ownVinyl, setOwnVinyl] = useState(false);
+  const [notes, setNotes] = useState('');
+  const [hasVinyl, setHasVinyl] = useState(false);
   const [needsReduxReview, setNeedsReduxReview] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const review: Review = {
+      artist: artist,
+      title: title,
+      projectType: projectType,
+      genres: genres.split(','),
+      releaseYear: parseInt(releaseYear),
+      rating: rating,
+      recommender: recommender,
+      bestTracks: bestTracks.split(','),
+      notes: notes,
+      hasVinyl: hasVinyl,
+      needsReduxReview: needsReduxReview,
+    };
+    console.log(review);
+
+    setIsPending(true);
+
+    try {
+      const res = await fetch('http://localhost:3000/api/review', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(review),
+      }).then((response) => {
+        console.log(response);
+        setIsPending(false);
+      });
+    } catch (e) {
+      console.error(e);
+      setIsPending(false);
+    }
+  };
 
   return (
-    <form action=''>
+    <form onSubmit={handleSubmit}>
       <div className='form-control w-full max-w-xs'>
         <label className='label'>
           <span className='label-text'>Artist</span>
         </label>
         <input
           type='text'
-          required
           value={artist}
           onChange={(e) => setArtist(e.target.value)}
           placeholder='Type here'
@@ -33,7 +69,6 @@ const newReviewForm = () => {
         </label>
         <input
           type='text'
-          required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder='Type here'
@@ -44,17 +79,18 @@ const newReviewForm = () => {
         </label>
         <select
           className='select select-bordered'
-          value={type}
-          onChange={(e) => setType(e.target.value)}
+          value={projectType}
+          onChange={(e) => setProjectType(e.target.value)}
         >
           <option disabled value='default'>
             Pick one
           </option>
-          <option value='album'>Album</option>
-          <option value='mixtape'>Mixtape</option>
-          <option value='ep'>EP</option>
-          <option value='compilation'>Compilation</option>
-          <option value='single'>Single</option>
+          {/* TODO: use enum to dynamically create options */}
+          <option value={ProjectType.ALBUM}>Album</option>
+          <option value={ProjectType.MIXTAPE}>Mixtape</option>
+          <option value={ProjectType.EP}>EP</option>
+          <option value={ProjectType.COMPILATION}>Compilation</option>
+          <option value={ProjectType.SINGLE}>Single</option>
         </select>
         {/* TODO: make this individual input fields / better */}
         <label className='label'>
@@ -74,7 +110,6 @@ const newReviewForm = () => {
         </label>
         <input
           type='text'
-          required
           value={releaseYear}
           onChange={(e) => setReleaseYear(e.target.value)}
           placeholder='Type here'
@@ -103,7 +138,6 @@ const newReviewForm = () => {
         </label>
         <input
           type='text'
-          required
           value={recommender}
           onChange={(e) => setRecommender(e.target.value)}
           placeholder='Type here'
@@ -127,16 +161,16 @@ const newReviewForm = () => {
         <textarea
           className='textarea textarea-bordered h-24'
           placeholder='Notes...'
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
         ></textarea>
         <label className='cursor-pointer label'>
           <span className='label-text'>Own Vinyl?</span>
           <input
             type='checkbox'
             className='toggle toggle-accent'
-            checked={ownVinyl}
-            onChange={() => setOwnVinyl(!ownVinyl)}
+            checked={hasVinyl}
+            onChange={() => setHasVinyl(!hasVinyl)}
           />
         </label>
         <label className='cursor-pointer label'>
@@ -148,16 +182,24 @@ const newReviewForm = () => {
             onChange={() => setNeedsReduxReview(!needsReduxReview)}
           />
         </label>
-        <button className='btn btn-primary'>Submit Review</button>
+        {!isPending && (
+          <button className='btn btn-primary'>Submit Review</button>
+        )}
+        {isPending && (
+          <button disabled className='btn'>
+            <span className='loading loading-spinner'></span>
+            Submitting
+          </button>
+        )}
         <p>artist {artist}</p>
         <p>title {title}</p>
-        <p>type {type}</p>
+        <p>projectType {projectType}</p>
         <p>genres {genres}</p>
         <p>rating {rating}</p>
         <p>recommender {recommender}</p>
         <p>bestTracks {bestTracks}</p>
-        <p>comment {comment}</p>
-        <p>ownVinyl {ownVinyl ? 'true' : 'false'}</p>
+        <p>notes {notes}</p>
+        <p>hasVinyl {hasVinyl ? 'true' : 'false'}</p>
         <p>needsReduxReview {needsReduxReview ? 'true' : 'false'}</p>
       </div>
     </form>
