@@ -57,7 +57,7 @@ const newReviewForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className='form-control w-full max-w-xs'>
+      <div className='form-control w-full max-w-xs mx-auto'>
         <label className='label'>
           <span className='label-text'>Artist</span>
         </label>
