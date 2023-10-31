@@ -31,6 +31,12 @@ export class CompletedReviewEntity {
   @Column({ default: 0 })
   releaseYear: number;
 
+  @Column({
+    default:
+      'https://static.vecteezy.com/system/resources/thumbnails/005/337/799/small_2x/icon-image-not-found-free-vector.jpg',
+  })
+  imageLink: string;
+
   @Column({ default: 0 })
   rating: number;
 

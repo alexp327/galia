@@ -1,4 +1,5 @@
 'use client';
+import { BASE_API_CLIENT_LINK } from '@/shared/environments/environment.local';
 import { ProjectType } from '@/shared/projecttype';
 import { Review } from '@/shared/review.interface';
 import { useRouter } from 'next/navigation';
@@ -11,6 +12,7 @@ const newReviewForm = () => {
   const [genres, setGenres] = useState('');
   const [releaseYear, setReleaseYear] = useState('');
   const [recommender, setRecommender] = useState('');
+  const [imageLink, setImageLink] = useState('');
   const [rating, setRating] = useState(1);
   const [bestTracks, setBestTracks] = useState('');
   const [notes, setNotes] = useState('');
@@ -29,6 +31,7 @@ const newReviewForm = () => {
       genres: genres.split(','),
       releaseYear: parseInt(releaseYear),
       recommender: recommender,
+      imageLink: imageLink,
       rating: rating,
       bestTracks: bestTracks.split(','),
       notes: notes,
@@ -40,7 +43,7 @@ const newReviewForm = () => {
     setIsPending(true);
 
     try {
-      const res = await fetch('http://localhost:3000/api/review', {
+      const res = await fetch(BASE_API_CLIENT_LINK + '/api/review', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(review),
@@ -126,6 +129,16 @@ const newReviewForm = () => {
           type='text'
           value={recommender}
           onChange={(e) => setRecommender(e.target.value)}
+          placeholder='Type here'
+          className='input input-bordered w-full max-w-2xl'
+        />
+        <label className='label'>
+          <span className='label-text'>Image Link</span>
+        </label>
+        <input
+          type='text'
+          value={imageLink}
+          onChange={(e) => setImageLink(e.target.value)}
           placeholder='Type here'
           className='input input-bordered w-full max-w-2xl'
         />

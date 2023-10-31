@@ -9,6 +9,7 @@ export interface Review {
   releaseYear?: number;
   rating?: number;
   recommender?: string;
+  imageLink?: string;
   bestTracks?: string[];
   notes?: string;
   hasVinyl?: boolean;

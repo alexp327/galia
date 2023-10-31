@@ -1,3 +1,4 @@
+import { BASE_API_SERVER_LINK } from '@/shared/environments/environment.local';
 import Link from 'next/link';
 import React from 'react';
 
@@ -20,7 +21,7 @@ interface MusicInfo {
 
 const listPage = async () => {
   // TODO: set env var in docker compose with container reference
-  const res = await fetch('http://172.20.0.4:3000/api/review', {
+  const res = await fetch(BASE_API_SERVER_LINK + '/api/review', {
     method: 'GET',
     cache: 'no-store',
   });
