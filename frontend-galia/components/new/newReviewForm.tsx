@@ -10,8 +10,8 @@ const newReviewForm = () => {
   const [projectType, setProjectType] = useState('default');
   const [genres, setGenres] = useState('');
   const [releaseYear, setReleaseYear] = useState('');
-  const [rating, setRating] = useState(1);
   const [recommender, setRecommender] = useState('');
+  const [rating, setRating] = useState(1);
   const [bestTracks, setBestTracks] = useState('');
   const [notes, setNotes] = useState('');
   const [hasVinyl, setHasVinyl] = useState(false);
@@ -28,8 +28,8 @@ const newReviewForm = () => {
       projectType: projectType,
       genres: genres.split(','),
       releaseYear: parseInt(releaseYear),
-      rating: rating,
       recommender: recommender,
+      rating: rating,
       bestTracks: bestTracks.split(','),
       notes: notes,
       hasVinyl: hasVinyl,
@@ -57,7 +57,7 @@ const newReviewForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className='form-control w-full max-w-xs mx-auto'>
+      <div className='form-control w-full max-w-2xl mx-auto'>
         <label className='label'>
           <span className='label-text'>Artist</span>
         </label>
@@ -66,7 +66,7 @@ const newReviewForm = () => {
           value={artist}
           onChange={(e) => setArtist(e.target.value)}
           placeholder='Type here'
-          className='input input-bordered w-full max-w-xs'
+          className='input input-bordered w-full max-w-2xl'
         />
         <label className='label'>
           <span className='label-text'>Title</span>
@@ -76,7 +76,7 @@ const newReviewForm = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder='Type here'
-          className='input input-bordered w-full max-w-xs'
+          className='input input-bordered w-full max-w-2xl'
         />
         <label className='label'>
           <span className='label-text'>Type</span>
@@ -117,7 +117,17 @@ const newReviewForm = () => {
           value={releaseYear}
           onChange={(e) => setReleaseYear(e.target.value)}
           placeholder='Type here'
-          className='input input-bordered w-full max-w-xs'
+          className='input input-bordered w-full max-w-2xl'
+        />
+        <label className='label'>
+          <span className='label-text'>Recommender</span>
+        </label>
+        <input
+          type='text'
+          value={recommender}
+          onChange={(e) => setRecommender(e.target.value)}
+          placeholder='Type here'
+          className='input input-bordered w-full max-w-2xl'
         />
         <label className='label'>
           <span className='label-text'>Rating</span>
@@ -137,16 +147,6 @@ const newReviewForm = () => {
             );
           })}
         </div>
-        <label className='label'>
-          <span className='label-text'>Recommender</span>
-        </label>
-        <input
-          type='text'
-          value={recommender}
-          onChange={(e) => setRecommender(e.target.value)}
-          placeholder='Type here'
-          className='input input-bordered w-full max-w-xs'
-        />
         <label className='label'>
           <span className='label-text'>Best Tracks</span>
         </label>

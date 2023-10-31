@@ -1,3 +1,12 @@
+## Helpful commands
+
+creating a db dump to restore off of - helpful when creating new containers for the db
+
+1. docker exec -t postgres-galia pg\*dumpall -c -U postgres > dump\_`date +%d-%m-%Y"*"%H*%M*%S`.sql
+2. cat dump\_\*.sql | docker exec -i postgres-galia psql -U postgres
+
+## Nest generated content
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
