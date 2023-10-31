@@ -195,16 +195,6 @@ const newReviewForm = () => {
             Submitting
           </button>
         )}
-        <p>artist {artist}</p>
-        <p>title {title}</p>
-        <p>projectType {projectType}</p>
-        <p>genres {genres}</p>
-        <p>rating {rating}</p>
-        <p>recommender {recommender}</p>
-        <p>bestTracks {bestTracks}</p>
-        <p>notes {notes}</p>
-        <p>hasVinyl {hasVinyl ? 'true' : 'false'}</p>
-        <p>needsReduxReview {needsReduxReview ? 'true' : 'false'}</p>
       </div>
     </form>
   );
