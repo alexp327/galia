@@ -2,7 +2,7 @@
 
 creating a db dump to restore off of - helpful when creating new containers for the db
 
-1. docker exec -t postgres-galia pg\*dumpall -c -U postgres > dump\_`date +%d-%m-%Y"*"%H*%M*%S`.sql
+1. docker exec -t postgres-galia pg_dumpall -c -U postgres > dump\_\`date +%d-%m-%Y"\_"%H\_%M\_%S`.sql
 2. cat dump\_\*.sql | docker exec -i postgres-galia psql -U postgres
 
 ## Nest generated content
