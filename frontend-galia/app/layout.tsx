@@ -5,6 +5,7 @@ import NavMenu from '@/components/navMenu';
 import { Button } from '@/components/ui/button';
 import { Plus, Twitter } from 'lucide-react';
 import Link from 'next/link';
+import MobileNav from '@/components/mobileNav';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,24 +22,32 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <header className='flex justify-between max-w-6xl mx-auto px-4 py-3'>
-          <div>
-            <div className='inline-block md:hidden mr-2'>hello</div>
-            <Button className='text-xl font-bold' variant='ghost'>
-              <Link href='/'>Galia</Link>
-            </Button>
+        <header className='flex justify-between max-w-6xl mx-auto px-3 py-3'>
+          <div className='flex'>
+            <div className='sm:hidden mr-2'>
+              <MobileNav />
+            </div>
+            <Link href='/'>
+              <Button className='text-xl font-bold' variant='ghost'>
+                Galia
+              </Button>
+            </Link>
           </div>
-          <div className='hidden md:inline-block'>
+          <div className='hidden sm:inline-flex'>
             <NavMenu />
           </div>
           <div className='flex gap-1'>
-            <Button variant='ghost' className='flex gap-2'>
-              <Plus />
-              <span className='hidden md:inline-block'>New Review</span>
-            </Button>
-            <Button variant='ghost'>
-              <Twitter />
-            </Button>
+            <Link href='https://twitter.com/pezvstheworld' target='blank'>
+              <Button variant='ghost'>
+                <Twitter />
+              </Button>
+            </Link>
+            <Link href='/new'>
+              <Button variant='ghost' className='flex gap-2'>
+                <Plus />
+                <span className='hidden sm:inline-flex'>New Review</span>
+              </Button>
+            </Link>
           </div>
         </header>
         {children}
