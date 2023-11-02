@@ -22,8 +22,8 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <header className='flex justify-between max-w-6xl mx-auto px-3 py-3'>
-          <div className='flex'>
+        <header className='flex justify-between max-w-7xl mx-auto px-3 py-3'>
+          <div className='flex w-1/6'>
             <div className='sm:hidden mr-2'>
               <MobileNav />
             </div>
@@ -33,12 +33,12 @@ export default function RootLayout({
               </Button>
             </Link>
           </div>
-          <div className='hidden sm:inline-flex'>
+          <div className='w-2/3 hidden sm:inline-flex justify-center'>
             <NavMenu />
           </div>
-          <div className='flex gap-1'>
+          <div className='w-1/6 flex justify-end gap-1'>
             <Link href='https://twitter.com/pezvstheworld' target='blank'>
-              <Button variant='ghost'>
+              <Button variant='ghost' className='p-2'>
                 <Twitter />
               </Button>
             </Link>
