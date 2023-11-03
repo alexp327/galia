@@ -14,7 +14,7 @@ const listPage = async () => {
 
   return (
     <div>
-      <ul className='grid grid-cols-1 md:grid-cols-2 gap-4 m-4 max-w-4xl mx-auto'>
+      <ul className='m-4 mx-auto grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
         {projectsList.map((project) => (
           <li>
             <ProjectCard
