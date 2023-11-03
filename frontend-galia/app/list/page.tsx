@@ -18,6 +18,7 @@ const listPage = async () => {
         {projectsList.map((project) => (
           <li>
             <ProjectCard
+              id={project.id!}
               src={project.imageLink!}
               artist={project.artist!}
               title={project.title!}

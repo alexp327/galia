@@ -50,7 +50,7 @@ export default function RootLayout({
             </Link>
           </div>
         </header>
-        {children}
+        <div className='max-w-7xl px-4 mx-auto'>{children}</div>
       </body>
     </html>
   );
