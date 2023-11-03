@@ -1,10 +1,10 @@
-import NewReviewForm from '@/components/new/newReviewForm';
+import AddReviewForm from '@/components/new/add-review-form';
 import React from 'react';
 
 const newReviewPage = () => {
   return (
-    <div className='mx-4 my-4'>
-      <NewReviewForm />
+    <div className='p-4 max-w-xl mx-auto'>
+      <AddReviewForm />
     </div>
   );
 };
