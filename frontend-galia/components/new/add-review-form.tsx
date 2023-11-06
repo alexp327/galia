@@ -83,7 +83,7 @@ const AddReviewForm = () => {
       }).then((response) => {
         console.log(response);
         setIsPending(false);
-        router.push('/list');
+        router.push('/reviews/list');
       });
     } catch (e) {
       console.error(e);

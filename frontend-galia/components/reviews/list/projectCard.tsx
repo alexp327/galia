@@ -11,12 +11,12 @@ interface Props {
 const projectCard = ({ id, src, artist, title }: Props) => {
   return (
     <Link
-      href={`/alex/${id}`}
-      className='shadow-xl p-2 bg-secondary flex gap-4 rounded-lg'
+      href={`/reviews/${id}`}
+      className='flex gap-4 rounded-lg bg-secondary p-2 shadow-xl'
     >
       <img src={src} alt='' className='w-1/3 rounded-sm'></img>
-      <div className='w-2/3 flex flex-col justify-center'>
-        <h3 className='font-bold text-lg'>{title}</h3>
+      <div className='flex w-2/3 flex-col justify-center'>
+        <h3 className='text-lg font-bold'>{title}</h3>
         <p>{artist}</p>
       </div>
     </Link>

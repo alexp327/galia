@@ -1,7 +1,6 @@
-import ProjectCard from '@/components/list/projectCard';
+import ProjectCard from '@/components/reviews/list/projectCard';
 import { BASE_API_SERVER_LINK } from '@/shared/environments/environment.local';
 import { Review } from '@/shared/review.interface';
-import Link from 'next/link';
 import React from 'react';
 
 const listPage = async () => {

@@ -6,7 +6,7 @@ export default function Home() {
     <main>
       <ul>
         <li>
-          <Link href='/list' className='text-3xl'>
+          <Link href='/reviews/list' className='text-3xl'>
             List
           </Link>
         </li>
