@@ -26,12 +26,16 @@ const ReviewDetailPage = async ({ params }: { params: { id: string } }) => {
 
   let ratingStars = [];
 
-  for (let i = 0; i < review.rating!; i++) {
-    ratingStars.push(<Star className='fill-primary stroke-primary' />);
+  for (let i = 0; i < 5; i++) {
+    if (review.rating! > i) {
+      ratingStars.push(<Star className='fill-primary stroke-primary' />);
+    } else {
+      ratingStars.push(<Star className='fill-background stroke-primary' />);
+    }
   }
 
   return (
-    <article className='mx-auto flex flex-col items-center rounded-lg bg-muted p-4'>
+    <section className='grid items-start gap-6 md:grid-cols-2 lg:gap-12'>
       <img
         src={
           review.imageLink
@@ -39,30 +43,37 @@ const ReviewDetailPage = async ({ params }: { params: { id: string } }) => {
             : 'https://static.vecteezy.com/system/resources/thumbnails/005/337/799/small_2x/icon-image-not-found-free-vector.jpg'
         }
         alt={`${review.title} cover art`}
-        className='w-full max-w-md rounded-md shadow-md shadow-card'
+        className='w-full rounded-md shadow-md shadow-card'
       />
-      <div className='mt-4 flex flex-col rounded-md bg-primary/25 p-2 sm:w-3/4 sm:px-4'>
-        <h2 className='text-center text-2xl font-bold'>{review.title}</h2>
-        <h3 className='text-center text-lg'>{review.artist}</h3>
+      <div className='space-y-6'>
+        <h1 className='text-3xl font-bold'>{review.title}</h1>
+        <p className='text-xl text-gray-400'>{review.artist}</p>
+        <div className='flex items-center space-x-2'>{ratingStars}</div>
+        <p className='text-base capitalize text-gray-300'>
+          {review.projectType} &#x2022; {review.releaseYear}
+        </p>
+        <ul className='flex space-x-2'>
+          {review.genres?.map((genre) => (
+            <li key={genre} className='rounded-md bg-muted px-2 py-1 text-sm'>
+              {genre}
+            </li>
+          ))}
+        </ul>
+        <div>{review.bestTracks}</div>
+        <div>{review.genres}</div>
+        <div>{review.notes}</div>
+        <div>{review.recommender}</div>
+        <div>{review.hasVinyl ? 'true' : 'false'}</div>
+        <div>{review.needsReduxReview ? 'true' : 'false'}</div>
+        <div>{review.createdAt!.toString()}</div>
+        <div>{review.updatedAt!.toString()}</div>
+        <Link href={`/reviews/${review.id}/edit`}>
+          <Button variant='secondary'>
+            <Edit className='mr-2'></Edit>Edit
+          </Button>
+        </Link>
       </div>
-      <p className='mt-4 capitalize'>
-        {review.projectType} &#x2022; {review.releaseYear}
-      </p>
-      <div className='mt-2 flex'>{ratingStars}</div>
-      <div>{review.bestTracks}</div>
-      <div>{review.genres}</div>
-      <div>{review.notes}</div>
-      <div>{review.recommender}</div>
-      <div>{review.hasVinyl ? 'true' : 'false'}</div>
-      <div>{review.needsReduxReview ? 'true' : 'false'}</div>
-      <div>{review.createdAt!.toString()}</div>
-      <div>{review.updatedAt!.toString()}</div>
-      <Link href={`/reviews/${review.id}/edit`}>
-        <Button className='w-48'>
-          <Edit className='mr-2'></Edit>Edit
-        </Button>
-      </Link>
-    </article>
+    </section>
   );
 };
 
