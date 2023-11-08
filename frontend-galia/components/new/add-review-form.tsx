@@ -28,6 +28,24 @@ import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { BASE_API_CLIENT_LINK } from '@/shared/environments/environment.local';
 import { useRouter } from 'next/navigation';
+import { ProjectType } from '@/shared/projecttype';
+
+interface ReviewFormProps {
+  update?: boolean;
+  id?: number;
+  artist?: string;
+  title?: string;
+  projectType?: string;
+  genres?: string;
+  releaseYear?: string;
+  recommender?: string;
+  imageLink?: string;
+  rating?: string;
+  bestTracks?: string;
+  notes?: string;
+  hasVinyl?: boolean;
+  needsReduxReview?: boolean;
+}
 
 const formSchema = z.object({
   artist: z.string().min(1),
@@ -44,12 +62,37 @@ const formSchema = z.object({
   needsReduxReview: z.boolean(),
 });
 
-const AddReviewForm = () => {
+const AddReviewForm = ({
+  update = false,
+  id = -1,
+  artist = '',
+  title = '',
+  projectType = ProjectType.ALBUM,
+  genres = '',
+  releaseYear = '',
+  recommender = '',
+  imageLink = '',
+  rating = '',
+  bestTracks = '',
+  notes = '',
+  hasVinyl = false,
+  needsReduxReview = false,
+}: ReviewFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      hasVinyl: false,
-      needsReduxReview: false,
+      artist: artist,
+      title: title,
+      projectType: projectType,
+      genres: genres,
+      releaseYear: releaseYear,
+      recommender: recommender,
+      imageLink: imageLink,
+      rating: rating,
+      bestTracks: bestTracks,
+      notes: notes,
+      hasVinyl: hasVinyl,
+      needsReduxReview: needsReduxReview,
     },
   });
 
@@ -75,9 +118,34 @@ const AddReviewForm = () => {
     };
     console.log(review);
 
+    if (update) {
+      updateReview(id, review);
+    } else {
+      createNewReview(review);
+    }
+  };
+
+  const createNewReview = async (review: Review) => {
     try {
       const res = await fetch(BASE_API_CLIENT_LINK + '/api/review', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(review),
+      }).then((response) => {
+        console.log(response);
+        setIsPending(false);
+        router.push('/reviews/list');
+      });
+    } catch (e) {
+      console.error(e);
+      setIsPending(false);
+    }
+  };
+
+  const updateReview = async (id: number, review: Review) => {
+    try {
+      const res = await fetch(BASE_API_CLIENT_LINK + '/api/review/' + id, {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(review),
       }).then((response) => {

@@ -2,7 +2,7 @@ import Date from '@/components/date';
 import { Button } from '@/components/ui/button';
 import { BASE_API_SERVER_LINK } from '@/shared/environments/environment.local';
 import { Review } from '@/shared/review.interface';
-import { Check, Edit, Info, Star, X } from 'lucide-react';
+import { Check, Edit, Info, Star, X, XCircle } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -117,11 +117,17 @@ const ReviewDetailPage = async ({ params }: { params: { id: string } }) => {
             ></Date>
           </p>
         </div>
-        <Link href={`/reviews/${review.id}/edit`} className='inline-flex'>
-          <Button variant='secondary'>
-            <Edit className='mr-2'></Edit>Edit
+        <div className='space-x-3'>
+          <Link href={`/reviews/${review.id}/edit`} className='inline-flex'>
+            <Button variant='secondary'>
+              <Edit className='mr-2'></Edit>Edit
+            </Button>
+          </Link>
+          <Button variant='destructive'>
+            <XCircle className='mr-2' />
+            Delete
           </Button>
-        </Link>
+        </div>
       </div>
     </section>
   );
