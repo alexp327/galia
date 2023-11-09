@@ -1,24 +1,11 @@
 import AddReviewForm from '@/components/new/add-review-form';
+import { getReviewDetails } from '@/lib/utils';
 import { BASE_API_SERVER_LINK } from '@/shared/environments/environment.local';
 import { Review } from '@/shared/review.interface';
 import React from 'react';
 
-const getReviewDetails = async (id: string) => {
-  console.log('fetching data');
-
-  const res = await fetch(`${BASE_API_SERVER_LINK}/api/review/${id}`, {
-    method: 'GET',
-    next: {
-      revalidate: 60,
-    },
-  });
-
-  console.log('fetched data');
-
-  return res.json();
-};
-
 const ReviewEditPage = async ({ params }: { params: { id: string } }) => {
+  // const review: Review = await getReviewDetails(params.id);
   const review: Review = await getReviewDetails(params.id);
 
   return (

@@ -21,9 +21,6 @@ import React from 'react';
 
 const ReviewDetailPage = async ({ params }: { params: { id: string } }) => {
   const review: Review = await getReviewDetails(params.id);
-  console.log('review is here');
-  console.log(review);
-
   if (!review.createdAt) {
     notFound();
   }

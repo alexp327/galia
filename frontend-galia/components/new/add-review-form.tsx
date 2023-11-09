@@ -116,7 +116,6 @@ const AddReviewForm = ({
       hasVinyl: values.hasVinyl,
       needsReduxReview: values.needsReduxReview,
     };
-    console.log(review);
 
     if (update) {
       updateReview(id, review);
@@ -132,7 +131,6 @@ const AddReviewForm = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(review),
       }).then((response) => {
-        console.log(response);
         setIsPending(false);
         router.refresh();
         router.push('/reviews/list');
@@ -150,8 +148,8 @@ const AddReviewForm = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(review),
       }).then((response) => {
-        console.log(response);
         setIsPending(false);
+        router.refresh();
         router.push('/reviews/list');
       });
     } catch (e) {

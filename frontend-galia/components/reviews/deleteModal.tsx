@@ -24,7 +24,6 @@ const deleteModal = (props: { title: string; id: string }) => {
     if (!deleted) {
       // TODO: add toast about failed deletion
     } else {
-      console.log(`review with id ${props.id} has been deleted`);
       router.refresh();
       router.push('/reviews/list');
     }

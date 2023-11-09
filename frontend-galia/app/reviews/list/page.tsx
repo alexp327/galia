@@ -14,7 +14,7 @@ const listPage = async () => {
 
     projectsList = await res.json();
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 
   return (

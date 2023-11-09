@@ -12,8 +12,10 @@ export function cn(...inputs: ClassValue[]) {
 export async function getReviewDetails(id: string) {
   const res = await fetch(`${BASE_API_SERVER_LINK}/api/review/${id}`, {
     method: 'GET',
-    cache: 'no-cache',
+    cache: 'no-store',
   });
+
+  // TODO: have server return 404 error if not found
 
   return res.json();
 }
@@ -25,14 +27,11 @@ export async function deleteReview(id: string, client: boolean) {
   } else {
     baseAPI = BASE_API_SERVER_LINK;
   }
-  console.log('deleting review id: ' + id);
 
   const res = await fetch(`${baseAPI}/api/review/${id}`, {
     method: 'DELETE',
-    cache: 'no-cache',
+    cache: 'no-store',
   });
-
-  console.log('deleted review id: ' + id);
 
   if (!res.ok) return undefined;
 
