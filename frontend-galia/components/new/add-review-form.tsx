@@ -134,6 +134,7 @@ const AddReviewForm = ({
       }).then((response) => {
         console.log(response);
         setIsPending(false);
+        router.refresh();
         router.push('/reviews/list');
       });
     } catch (e) {

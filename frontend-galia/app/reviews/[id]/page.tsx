@@ -1,28 +1,32 @@
 import Date from '@/components/date';
+import DeleteModal from '@/components/reviews/deleteModal';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { BASE_API_SERVER_LINK } from '@/shared/environments/environment.local';
+import { deleteReview, getReviewDetails } from '@/lib/utils';
 import { Review } from '@/shared/review.interface';
 import { Check, Edit, Info, Star, X, XCircle } from 'lucide-react';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import React from 'react';
-
-const getReviewDetails = async (id: string) => {
-  console.log('fetching data');
-
-  const res = await fetch(`${BASE_API_SERVER_LINK}/api/review/${id}`, {
-    method: 'GET',
-    next: {
-      revalidate: 60,
-    },
-  });
-
-  console.log('fetched data');
-
-  return res.json();
-};
 
 const ReviewDetailPage = async ({ params }: { params: { id: string } }) => {
   const review: Review = await getReviewDetails(params.id);
+  console.log('review is here');
+  console.log(review);
+
+  if (!review.createdAt) {
+    notFound();
+  }
 
   let ratingStars = [];
 
@@ -123,10 +127,7 @@ const ReviewDetailPage = async ({ params }: { params: { id: string } }) => {
               <Edit className='mr-2'></Edit>Edit
             </Button>
           </Link>
-          <Button variant='destructive'>
-            <XCircle className='mr-2' />
-            Delete
-          </Button>
+          <DeleteModal title={review.title!} id={review.id!.toString()} />
         </div>
       </div>
     </section>
