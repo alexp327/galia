@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Plus, Twitter } from 'lucide-react';
 import Link from 'next/link';
 import MobileNav from '@/components/mobileNav';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,9 +23,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <header className='flex justify-between max-w-7xl mx-auto px-3 py-3'>
+        <header className='mx-auto flex max-w-7xl justify-between px-3 py-3'>
           <div className='flex w-1/6'>
-            <div className='sm:hidden mr-2'>
+            <div className='mr-2 sm:hidden'>
               <MobileNav />
             </div>
             <Link href='/'>
@@ -33,10 +34,10 @@ export default function RootLayout({
               </Button>
             </Link>
           </div>
-          <div className='w-2/3 hidden sm:inline-flex justify-center'>
+          <div className='hidden w-2/3 justify-center sm:inline-flex'>
             <NavMenu />
           </div>
-          <div className='w-1/6 flex justify-end gap-1'>
+          <div className='flex w-1/6 justify-end gap-1'>
             <Link href='https://twitter.com/pezvstheworld' target='blank'>
               <Button variant='ghost' className='p-2'>
                 <Twitter />
@@ -50,7 +51,8 @@ export default function RootLayout({
             </Link>
           </div>
         </header>
-        <div className='max-w-7xl px-4 mx-auto'>{children}</div>
+        <div className='mx-auto max-w-7xl px-4'>{children}</div>
+        <Toaster />
       </body>
     </html>
   );

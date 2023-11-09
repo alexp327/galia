@@ -15,14 +15,20 @@ import {
 import { Button } from '../ui/button';
 import { deleteReview } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
+import { useToast } from '../ui/use-toast';
 
 const deleteModal = (props: { title: string; id: string }) => {
   const router = useRouter();
+  const toast = useToast();
 
   const handleDeleteReview = async () => {
     let deleted = await deleteReview(props.id, true);
     if (!deleted) {
-      // TODO: add toast about failed deletion
+      toast.toast({
+        variant: 'destructive',
+        title: 'Error: Delete Review',
+        description: 'There was a problem with your request.',
+      });
     } else {
       router.refresh();
       router.push('/reviews/list');
