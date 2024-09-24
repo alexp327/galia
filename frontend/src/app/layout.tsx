@@ -35,7 +35,7 @@ export default function RootLayout({
             <div className='w-full flex flex-col gap-20 items-center'>
               <nav className='w-full flex justify-center border-b border-b-foreground/10 h-16'>
                 <div className='w-full max-w-screen-xl flex justify-between items-center py-3 px-4 md:px-20 text-sm'>
-                  <div className='flex gap-5 items-center font-semibold'>
+                  <div className='flex gap-5 items-center font-semibold text-xl'>
                     <Link href={'/'}>Galia</Link>
                   </div>
                   <HeaderAuth />
@@ -43,7 +43,7 @@ export default function RootLayout({
               </nav>
             </div>
 
-            <div className='flex flex-col flex-1 h-full mx-auto max-w-screen-xl px-4 md:px-20 py-2.5'>
+            <div className='flex flex-col flex-1 h-full mx-auto max-w-screen-xl px-4 md:px-20 py-2.5 w-full'>
               {children}
             </div>
 
