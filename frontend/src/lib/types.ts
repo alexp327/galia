@@ -8,6 +8,7 @@ export type Rating = {
   notes: string;
   own_physical: boolean;
   created_at: string; // use new Date() when displaying
+  updated_at: string; // use new Date() when displaying
   release_group: ReleaseGroup;
 };
 
