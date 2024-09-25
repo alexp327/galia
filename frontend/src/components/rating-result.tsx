@@ -10,7 +10,23 @@ type RatingResultProps = {
   rating: Rating;
 };
 
+const getColorForRating = (rating: number) => {
+  let red, green;
+
+  if (rating <= 5) {
+    red = 255;
+    green = Math.floor((rating / 5) * 230);
+  } else {
+    red = Math.floor(((10 - rating) / 5) * 255);
+    green = 200;
+  }
+
+  return `rgb(${red}, ${green}, 90)`;
+};
+
 const RatingResult = ({ rating }: RatingResultProps) => {
+  const ratingColor = getColorForRating(rating.rating);
+
   return (
     <div className='flex gap-2 hover:bg-accent/50 hover:cursor-pointer p-1 rounded-sm transition-all'>
       {/* TODO: add skeleton until cover art loads */}
@@ -27,8 +43,12 @@ const RatingResult = ({ rating }: RatingResultProps) => {
         </h5>
       </div>
       <div className='flex justify-center items-center w-12 h-12 rounded-sm'>
-        {/* TODO: add variable text color based on rating? */}
-        <h3 className={cn(shantell.className, 'text-4xl')}>{rating.rating}</h3>
+        <h3
+          className={cn(shantell.className, 'text-4xl')}
+          style={{ color: ratingColor }}
+        >
+          {rating.rating}
+        </h3>
       </div>
       <div className='hidden lg:flex justify-end items-center w-1/3 pr-3'>
         <p>
