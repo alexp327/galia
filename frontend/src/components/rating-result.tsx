@@ -10,7 +10,7 @@ type RatingResultProps = {
   rating: Rating;
 };
 
-const getColorForRating = (rating: number) => {
+export const getColorForRating = (rating: number) => {
   let red, green;
 
   if (rating <= 5) {

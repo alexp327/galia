@@ -1,12 +1,27 @@
 import RatingResult from '@/src/components/rating-result';
-import { Button } from '@/src/components/ui/button';
 import { Separator } from '@/src/components/ui/separator';
 import { Rating } from '@/src/lib/types';
 import { createClient } from '@/utils/supabase/server';
 import { ChevronDown, ChevronUp, FilterIcon, Image } from 'lucide-react';
 import Link from 'next/link';
 
-export default async function Page({ searchParams }: any) {
+interface SearchParams {
+  orderBy?: keyof Rating;
+  orderDirection?: 'asc' | 'desc';
+  offset?: number;
+}
+
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: { username: string; id: string };
+  searchParams: SearchParams;
+}) {
+  /* TODO: add username check to make sure user exist and current user
+  has access to the requested user's reviews
+  */
+
   const orderBy: keyof Rating = searchParams.orderBy || 'updated_at';
   const orderDirection = searchParams.orderDirection === 'asc' ? true : false;
 
@@ -21,9 +36,12 @@ export default async function Page({ searchParams }: any) {
     // });
 
     // built the following rpc function to work around the bug
-    query = supabase.rpc('get_ratings_by_title', { ascending: orderDirection });
+    query = supabase.rpc('get_ratings_by_title', {
+      ascending: orderDirection,
+      offset_val: 0,
+    });
   } else {
-    query = query.order(orderBy, { ascending: orderDirection });
+    query = query.order(orderBy, { ascending: orderDirection }).range(0, 25);
   }
 
   const { data, error } = await query;
@@ -41,12 +59,6 @@ export default async function Page({ searchParams }: any) {
 
   return (
     <section>
-      <div className='mb-2.5'>
-        <Button variant='outline' size={'sm'} className='gap-1'>
-          <FilterIcon className='w-5' />
-          Filters
-        </Button>
-      </div>
       <div className='border p-1 rounded-sm'>
         <div className='flex gap-2 p-1 text-foreground/70'>
           <h4 className='w-12 flex justify-center'>
@@ -113,7 +125,9 @@ export default async function Page({ searchParams }: any) {
         <ol id='resultsTable' className='flex flex-col'>
           {ratings.map((rating) => (
             <li key={rating.id}>
-              <RatingResult rating={rating} />
+              <Link href={`/${params.username}/reviews/${rating.release_id}`}>
+                <RatingResult rating={rating} />
+              </Link>
             </li>
           ))}
         </ol>
