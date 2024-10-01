@@ -27,8 +27,8 @@ export default function RootLayout({
       <body className='bg-background text-foreground'>
         <ThemeProvider
           attribute='class'
-          defaultTheme='system'
-          enableSystem
+          defaultTheme='dark'
+          // enableSystem
           disableTransitionOnChange
         >
           <main className='min-h-screen flex flex-col items-center'>
@@ -60,7 +60,7 @@ export default function RootLayout({
                     Alex Perry
                   </a>
                 </p>
-                <ThemeSwitcher />
+                {/* <ThemeSwitcher /> */}
               </footer>
             </div>
           </main>

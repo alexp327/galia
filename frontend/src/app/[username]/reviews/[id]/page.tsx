@@ -37,8 +37,8 @@ const page = async ({
 
   return rating ? (
     <section className='py-4 max-w-screen-xl mx-auto'>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
-        <div className='col-span-1 text-center space-y-10'>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+        <div className='col-span-1 text-center'>
           <img
             src={`https://coverartarchive.org/release-group/${rating.release_group.rg_id}/front-500`}
             alt={`${rating.release_group.title} cover art`}
@@ -46,59 +46,67 @@ const page = async ({
             height={500}
             className='mx-auto'
           />
-          <h2
-            className={cn(shantell.className, 'text-9xl')}
-            style={{ color: getColorForRating(rating.rating) }}
-          >
-            {rating.rating}
-          </h2>
+          <h5 className='text-muted-foreground mt-4'>
+            {rating.release_group.type === 1 ? 'Album' : 'type not supported'}{' '}
+            &middot;{' '}
+            {new Date(rating.release_group.release_date).toLocaleDateString(
+              'en-US',
+              {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              }
+            )}
+          </h5>
         </div>
         <div className='col-span-2'>
-          <h1 className='text-5xl font-bold mt-4 md:mt-0 break-words'>
-            {rating.release_group.title}
-          </h1>
-          <Separator className='my-4' />
+          <div>
+            <h1 className='text-5xl font-bold mt-4 md:mt-0 break-words'>
+              {rating.release_group.title}
+            </h1>
+            <h4 className='mt-2 text-muted-foreground text-lg'>
+              {rating.release_group.artist}
+            </h4>
+          </div>
+          <Separator className='my-3' />
           <table className='table-auto w-full mt-4'>
             <tbody>
               <tr>
-                <td className='text-muted-foreground w-1/4 py-1'>Artist</td>
-                <td className='w-3/4'>{rating.release_group.artist}</td>
+                <td className='text-muted-foreground w-1/4 py-1.5'>Rating</td>
+                <td
+                  className={cn(shantell.className, 'text-8xl w-3/4 py-1.5')}
+                  style={{ color: getColorForRating(rating.rating) }}
+                >
+                  {rating.rating}
+                </td>
               </tr>
               <tr>
-                <td className='text-muted-foreground w-1/4 py-1'>
+                <td className='text-muted-foreground w-1/4 py-1.5'>
                   Recommender
                 </td>
-                <td className='w-3/4'>{rating.recommender}</td>
+                <td className='w-3/4 py-1.5'>{rating.recommender}</td>
               </tr>
               <tr>
-                <td className='text-muted-foreground w-1/4 py-1'>
+                <td className='text-muted-foreground w-1/4 py-1.5'>
                   Favorite Tracks
                 </td>
-                <td className='w-3/4'>{rating.favorite_tracks}</td>
+                <td className='w-3/4 py-1.5'>{rating.favorite_tracks}</td>
               </tr>
               <tr>
-                <td className='text-muted-foreground w-1/4 py-1'>Notes</td>
-                <td className='w-3/4'>{rating.notes}</td>
+                <td className='text-muted-foreground w-1/4 py-1.5'>Notes</td>
+                <td className='w-3/4 py-1.5'>{rating.notes}</td>
               </tr>
               <tr>
-                <td className='text-muted-foreground w-1/4 py-1'>
+                <td className='text-muted-foreground w-1/4 py-1.5'>
                   Own Physical Copy
                 </td>
-                <td className='w-3/4'>{rating.own_physical ? 'Yes' : 'No'}</td>
-              </tr>
-              <tr>
-                <td className='text-muted-foreground w-1/4 py-1'>
-                  Release Date
-                </td>
-                <td className='w-3/4'>
-                  {new Date(
-                    rating.release_group.release_date
-                  ).toLocaleDateString()}
+                <td className='w-3/4 py-1.5'>
+                  {rating.own_physical ? 'Yes' : 'No'}
                 </td>
               </tr>
               <tr>
-                <td className='text-muted-foreground w-1/4 py-1'>Created At</td>
-                <td className='w-3/4'>
+                <td className='text-muted-foreground w-1/4 py-1.5'>Created</td>
+                <td className='w-3/4 py-1.5'>
                   {new Date(rating.created_at).toLocaleDateString('en-US', {
                     month: 'long',
                     day: 'numeric',
@@ -107,8 +115,10 @@ const page = async ({
                 </td>
               </tr>
               <tr>
-                <td className='text-muted-foreground w-1/4 py-1'>Updated At</td>
-                <td className='w-3/4'>
+                <td className='text-muted-foreground w-1/4 py-1.5'>
+                  Last Updated
+                </td>
+                <td className='w-3/4 py-1.5'>
                   {new Date(rating.updated_at).toLocaleDateString('en-US', {
                     month: 'long',
                     day: 'numeric',
