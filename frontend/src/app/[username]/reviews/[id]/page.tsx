@@ -1,6 +1,6 @@
 import { getColorForRating, shantell } from '@/src/components/rating-result';
 import { Separator } from '@/src/components/ui/separator';
-import { Rating } from '@/src/lib/types';
+import { Profile, Rating } from '@/src/lib/types';
 import { cn } from '@/src/lib/utils';
 import { createClient } from '@/utils/supabase/server';
 
@@ -13,10 +13,33 @@ const page = async ({
 }: {
   params: { username: string; id: string };
 }) => {
-  // TODO: check if user has the necessary permissions to view this page
-  // if not, show "locked" page
+  // check if user has the necessary permissions to view this page
 
   const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return <div>no current session</div>;
+  }
+
+  const { data: profileData } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('username', params.username);
+
+  if (!profileData || profileData.length === 0) {
+    return <div>Username not found</div>;
+  }
+
+  const profile = profileData[0] as Profile;
+
+  if (profile.user_id !== user.id) {
+    return <div>Unauthorized</div>;
+  }
+
   let query = supabase
     .from('ratings')
     .select(`*, release_group (*)`)

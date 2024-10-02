@@ -4,7 +4,7 @@ import { SubmitButton } from '@/src/components/submit-button';
 import { Input } from '@/src/components/ui/input';
 import { Label } from '@/src/components/ui/label';
 import Link from 'next/link';
-import { SmtpMessage } from '../smtp-message';
+import React from 'react';
 
 export default function ForgotPassword({
   searchParams,
@@ -32,7 +32,6 @@ export default function ForgotPassword({
           <FormMessage message={searchParams} />
         </div>
       </form>
-      <SmtpMessage />
     </>
   );
 }

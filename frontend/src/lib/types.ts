@@ -22,3 +22,12 @@ export type ReleaseGroup = {
   release_date: string;
 };
 
+export type Profile = {
+  user_id: string;
+  username: string;
+  bio: string;
+  pfp_url: string;
+  first_name: string;
+  last_name: string;
+};
+

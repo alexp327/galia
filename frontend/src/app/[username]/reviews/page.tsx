@@ -1,9 +1,10 @@
 import RatingResult from '@/src/components/rating-result';
 import { Separator } from '@/src/components/ui/separator';
-import { Rating } from '@/src/lib/types';
+import { Profile, Rating } from '@/src/lib/types';
 import { createClient } from '@/utils/supabase/server';
-import { ChevronDown, ChevronUp, FilterIcon, Image } from 'lucide-react';
+import { ChevronDown, ChevronUp, Image } from 'lucide-react';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 interface SearchParams {
   orderBy?: keyof Rating;
@@ -18,14 +19,38 @@ export default async function Page({
   params: { username: string; id: string };
   searchParams: SearchParams;
 }) {
-  /* TODO: add username check to make sure user exist and current user
-  has access to the requested user's reviews
+  const supabase = createClient();
+
+  /* make sure user exists and current user
+      has access to the requested user's reviews
   */
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return <div>no current session</div>;
+  }
+
+  const { data: profileData } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('username', params.username);
+
+  if (!profileData || profileData.length === 0) {
+    return <div>Username not found</div>;
+  }
+
+  const profile = profileData[0] as Profile;
+
+  if (profile.user_id !== user.id) {
+    return <div>Unauthorized</div>;
+  }
 
   const orderBy: keyof Rating = searchParams.orderBy || 'updated_at';
   const orderDirection = searchParams.orderDirection === 'asc' ? true : false;
+  const offset = searchParams.offset || 0;
 
-  const supabase = createClient();
   let query = supabase.from('ratings').select(`*, release_group (*)`);
 
   if ((orderBy as string) === 'title') {
