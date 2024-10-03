@@ -2,15 +2,29 @@ import { signOutAction } from '@/src/app/actions';
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { createClient } from '@/utils/supabase/server';
+import { Profile } from '../lib/types';
 
 export default async function AuthButton() {
+  const supabase = createClient();
   const {
     data: { user },
-  } = await createClient().auth.getUser();
+  } = await supabase.auth.getUser();
+
+  let profile = null;
+  if (user) {
+    const { data: profileData } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('user_id', user.id);
+    profile =
+      profileData && profileData.length > 0
+        ? (profileData[0] as Profile)
+        : null;
+  }
 
   return user ? (
     <div className='flex items-center gap-4'>
-      Hey, {user.email}!
+      Hey, @{profile?.username}!
       <form action={signOutAction}>
         <Button type='submit' variant={'outline'}>
           Sign out
