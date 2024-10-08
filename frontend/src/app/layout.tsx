@@ -46,7 +46,6 @@ export default function RootLayout({
 
             <div className='flex flex-col flex-1 h-full mx-auto max-w-screen-xl px-4 md:px-20 py-2.5 w-full'>
               {children}
-              <Toaster />
             </div>
 
             <div className='w-full flex flex-col gap-20 items-center'>
@@ -66,6 +65,7 @@ export default function RootLayout({
               </footer>
             </div>
           </main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
