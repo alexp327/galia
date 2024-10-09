@@ -5,7 +5,7 @@ import { cn } from '@/src/lib/utils';
 import { createClient } from '@/utils/supabase/server';
 
 // id corresponds to the id of the project in the release_group
-//   table, not the rg_id. Then it can be used as something to check
+//   table. Then it can be used as something to check
 //   to conditionally render the review or lack thereof.
 
 const page = async ({
@@ -63,7 +63,7 @@ const page = async ({
       <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
         <div className='col-span-1 text-center'>
           <img
-            src={`https://coverartarchive.org/release-group/${rating.release_group.rg_id}/front-500`}
+            src={`https://coverartarchive.org/release-group/${rating.release_group.id}/front-500`}
             alt={`${rating.release_group.title} cover art`}
             width={500}
             height={500}

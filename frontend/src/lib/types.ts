@@ -1,6 +1,6 @@
 export type Rating = {
   id: string;
-  release_id: number;
+  release_group_id: string;
   user_id: string;
   rating: number;
   recommender: string;
@@ -13,9 +13,8 @@ export type Rating = {
 };
 
 export type ReleaseGroup = {
-  id: number;
+  id: string;
   type: number;
-  rg_id: string;
   title: string;
   artist: string;
   created_at: string;

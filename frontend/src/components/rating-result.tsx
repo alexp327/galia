@@ -31,7 +31,7 @@ const RatingResult = ({ rating }: RatingResultProps) => {
     <div className='flex gap-2 hover:bg-accent/50 hover:cursor-pointer p-1 rounded-sm transition-all'>
       {/* TODO: add skeleton until cover art loads */}
       <img
-        src={`https://coverartarchive.org/release-group/${rating.release_group.rg_id}/front-250`}
+        src={`https://coverartarchive.org/release-group/${rating.release_group.id}/front-250`}
         alt={`Cover art for ${rating.release_group.title}`}
         className='w-12 rounded-sm'
       />

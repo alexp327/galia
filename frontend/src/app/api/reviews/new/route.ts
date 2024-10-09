@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
   // insert the new review into the database
   const { error } = await supabase.from('ratings').insert([
     {
-      release_id: body.release_id,
+      release_group_id: body.release_group_id,
       rating: body.rating,
       recommender: body.recommender,
       favorite_tracks: body.favorite_tracks,
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
 
   return NextResponse.json(
     {
-      message: `Review of ${body.release_id} for user ${user.id} successfully created.`,
+      message: `Review of ${body.release_group_id} for user ${user.email} successfully created.`,
     },
     { status: 201 }
   );

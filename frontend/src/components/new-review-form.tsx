@@ -19,7 +19,7 @@ import { Checkbox } from './ui/checkbox';
 import { toast } from './hooks/use-toast';
 
 const formSchema = z.object({
-  release_id: z.number().min(1, { message: 'Release ID is required.' }),
+  release_group_id: z.string().min(1, { message: 'Release ID is required.' }),
   rating: z
     .number()
     .min(1)
@@ -33,7 +33,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const defaultValues: Partial<FormValues> = {
-  release_id: undefined,
+  release_group_id: undefined,
   rating: undefined,
   recommender: '',
   favorite_tracks: '',
@@ -85,19 +85,12 @@ export function NewReviewForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
         <FormField
           control={form.control}
-          name='release_id'
+          name='release_group_id'
           render={({ field }) => (
             <FormItem>
               <FormLabel>Release ID</FormLabel>
               <FormControl>
-                <Input
-                  type='number'
-                  placeholder='Enter release ID'
-                  {...field}
-                  value={field.value ?? ''}
-                  onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                  className='[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
-                />
+                <Input placeholder='Enter release ID' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
