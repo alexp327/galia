@@ -43,7 +43,7 @@ const page = async ({
   let query = supabase
     .from('ratings')
     .select(`*, release_group (*)`)
-    .eq('release_id', params.id);
+    .eq('id', params.id);
 
   const { data, error } = await query;
 
@@ -62,13 +62,13 @@ const page = async ({
     <section className='py-4 max-w-screen-xl mx-auto'>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
         <div className='col-span-1 text-center'>
-          <img
-            src={`https://coverartarchive.org/release-group/${rating.release_group.id}/front-500`}
-            alt={`${rating.release_group.title} cover art`}
-            width={500}
-            height={500}
-            className='mx-auto'
-          />
+          <object
+            data={`https://coverartarchive.org/release-group/${rating.release_group.id}/front-500`}
+            type='image/png'
+            className='mx-auto w-full h-auto'
+          >
+            <img src='/fallback.png' alt='' />
+          </object>
           <h5 className='text-muted-foreground mt-4'>
             {rating.release_group.type === 1 ? 'Album' : 'type not supported'}{' '}
             &middot;{' '}

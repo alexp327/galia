@@ -29,12 +29,13 @@ const RatingResult = ({ rating }: RatingResultProps) => {
 
   return (
     <div className='flex gap-2 hover:bg-accent/50 hover:cursor-pointer p-1 rounded-sm transition-all'>
-      {/* TODO: add skeleton until cover art loads */}
-      <img
-        src={`https://coverartarchive.org/release-group/${rating.release_group.id}/front-250`}
-        alt={`Cover art for ${rating.release_group.title}`}
-        className='w-12 rounded-sm'
-      />
+      <object
+        data={`https://coverartarchive.org/release-group/${rating.release_group.id}/front-250`}
+        type='image/png'
+        className='mx-auto w-12 h-auto rounded-sm'
+      >
+        <img src='/fallback.png' alt='' />
+      </object>
       <div className='flex-1 flex flex-col justify-center text-nowrap overflow-hidden'>
         <h4 className='text-md'>{rating.release_group.title}</h4>
         <h5 className='text-foreground/70 text-sm'>
