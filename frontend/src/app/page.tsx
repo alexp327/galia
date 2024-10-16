@@ -7,11 +7,14 @@ export default async function Index() {
       <Link href={'/alex/reviews'}>
         <h4 className='mb-4'>album list</h4>
       </Link>
-      <Link href={'/new'}>
+      <Link href={'/new/review'}>
         <h4 className='mb-4'>new review</h4>
       </Link>
       <Link href={'/alex/recs'}>
         <h4 className='mb-4'>recs list</h4>
+      </Link>
+      <Link href={'/new/rec'}>
+        <h4 className='mb-4'>new rec</h4>
       </Link>
     </section>
   );
