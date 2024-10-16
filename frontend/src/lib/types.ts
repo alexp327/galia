@@ -12,6 +12,16 @@ export type Rating = {
   release_group: ReleaseGroup;
 };
 
+export type Recommendation = {
+  id: bigint;
+  user_id: string;
+  release_group_id: string;
+  recommender: string;
+  recommended_on: string; // use new Date() when displaying
+  priority: boolean;
+  release_group: ReleaseGroup;
+};
+
 export type ReleaseGroup = {
   id: string;
   type: number;

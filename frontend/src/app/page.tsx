@@ -10,6 +10,9 @@ export default async function Index() {
       <Link href={'/new'}>
         <h4 className='mb-4'>new review</h4>
       </Link>
+      <Link href={'/alex/recs'}>
+        <h4 className='mb-4'>recs list</h4>
+      </Link>
     </section>
   );
 }
