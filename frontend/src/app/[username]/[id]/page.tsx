@@ -6,9 +6,8 @@ import { cn } from '@/src/lib/utils';
 import { createClient } from '@/utils/supabase/server';
 import { CircleChevronDown, CircleChevronUp, Info } from 'lucide-react';
 
-// id corresponds to the id of the project in the release_group
-//   table. Then it can be used as something to check
-//   to conditionally render the review/rec or lack thereof.
+// id corresponds to the id of the project in the release_group table.
+//   Then used to conditionally render the review/rec or lack thereof.
 
 const page = async ({
   params,
@@ -41,22 +40,6 @@ const page = async ({
   if (profile.user_id !== user.id) {
     return <div>Unauthorized</div>;
   }
-
-  /* old stuff
-  let query = supabase
-    .from('ratings')
-    .select(`*, release_group (*)`)
-    .eq('id', params.id);
-
-  const { data, error } = await query;
-
-  if (error) {
-    console.error('Query Error:', error);
-    return <div>Error fetching ratings</div>;
-  }
-
-  let rating: Rating | null = data.length > 0 ? (data[0] as Rating) : null;
-  */
 
   const { data: releaseGroupData, error: releaseGroupError } = await supabase
     .from('release_group')
@@ -105,19 +88,6 @@ const page = async ({
   if (!release_group) {
     return <div>Release group not found</div>;
   }
-
-  /*
-  4 cases:
-  - rating exists, recommendation exists
-    show rating and that it has been recommended with text at bottom
-  - rating exists, recommendation does not exist
-    show rating and dont show any text
-  - rating does not exist, recommendation exists
-    still show album art and title but replace rating with recommendation text
-  - rating does not exist, recommendation does not exist
-    show text that says no review or recommendation
-    add buttons to create review or recommendation
-  */
 
   return (
     <section className='py-4 max-w-screen-xl mx-auto'>
