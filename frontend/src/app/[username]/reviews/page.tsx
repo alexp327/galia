@@ -150,7 +150,7 @@ export default async function Page({
         <ol id='resultsTable' className='flex flex-col'>
           {ratings.map((rating) => (
             <li key={rating.id}>
-              <Link href={`/${params.username}/reviews/${rating.id}`}>
+              <Link href={`/${params.username}/${rating.release_group_id}`}>
                 <RatingResult rating={rating} />
               </Link>
             </li>

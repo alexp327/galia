@@ -133,7 +133,9 @@ const RecsPage = async ({
         <ol id='resultsTable' className='flex flex-col'>
           {recommendations.map((recommendation) => (
             <li key={recommendation.id}>
-              <Link href={`/${params.username}/reviews/${recommendation.id}`}>
+              <Link
+                href={`/${params.username}/${recommendation.release_group_id}`}
+              >
                 <RecommendationResult recommendation={recommendation} />
               </Link>
             </li>
