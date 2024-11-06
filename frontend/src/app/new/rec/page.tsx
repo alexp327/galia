@@ -1,3 +1,4 @@
+import NewRecForm from '@/src/components/new-rec-form';
 import { createClient } from '@/utils/supabase/server';
 
 const NewReviewPage = async () => {
@@ -14,6 +15,7 @@ const NewReviewPage = async () => {
   return (
     <section>
       <h2 className='text-xl mb-8'>New Recommendation</h2>
+      <NewRecForm />
     </section>
   );
 };
