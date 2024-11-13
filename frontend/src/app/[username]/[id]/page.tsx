@@ -140,6 +140,21 @@ const page = async ({
                 </tr>
                 <tr>
                   <td className='text-muted-foreground w-1/4 py-1.5'>
+                    Recommended On
+                  </td>
+                  <td className='w-3/4 py-1.5'>
+                    {new Date(rating.recommended_on).toLocaleDateString(
+                      'en-US',
+                      {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                      }
+                    )}
+                  </td>
+                </tr>
+                <tr>
+                  <td className='text-muted-foreground w-1/4 py-1.5'>
                     Favorite Tracks
                   </td>
                   <td className='w-3/4 py-1.5'>{rating.favorite_tracks}</td>
