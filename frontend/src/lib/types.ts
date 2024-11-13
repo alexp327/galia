@@ -4,6 +4,7 @@ export type Rating = {
   user_id: string;
   rating: number;
   recommender: string;
+  recommended_on: string; // use new Date() when displaying
   favorite_tracks: string;
   notes: string;
   own_physical: boolean;

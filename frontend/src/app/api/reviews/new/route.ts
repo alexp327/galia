@@ -34,6 +34,7 @@ export async function POST(request: NextRequest) {
       favorite_tracks: body.favorite_tracks,
       notes: body.notes,
       own_physical: body.own_physical,
+      recommended_on: body.recommended_on,
       user_id: user.id,
     },
   ]);

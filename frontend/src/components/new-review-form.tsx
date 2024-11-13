@@ -28,6 +28,9 @@ const formSchema = z.object({
   favorite_tracks: z.string().optional(),
   notes: z.string().optional(),
   own_physical: z.boolean().optional(),
+  recommended_on: z
+    .string()
+    .min(1, { message: 'Date recommended is required.' }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -39,6 +42,7 @@ const defaultValues: Partial<FormValues> = {
   favorite_tracks: '',
   notes: '',
   own_physical: false,
+  recommended_on: '',
 };
 
 export function NewReviewForm() {
@@ -167,6 +171,19 @@ export function NewReviewForm() {
                 />
               </FormControl>
               <FormLabel>Own Physical Copy</FormLabel>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name='recommended_on'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Date Recommended</FormLabel>
+              <FormControl>
+                <Input type='date' {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
